@@ -14,16 +14,15 @@ export default function App() {
   
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleQueryChange = (newQuery) => {
-    setSearchQuery(newQuery);
-  }
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <div>
       <h1>Phonebook</h1>
       {/* <ContactForm /> */}
-      <SearchBox inputValue={searchQuery} onChange={handleQueryChange} />
-      <ContactList contacts={contacts} searchQuery={searchQuery} />
+      <SearchBox inputValue={searchQuery} onChange={setSearchQuery} />
+      <ContactList contacts={visibleContacts} />
     </div>
 
   )
