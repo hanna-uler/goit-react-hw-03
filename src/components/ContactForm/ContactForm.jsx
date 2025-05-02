@@ -22,7 +22,7 @@ export default function ContactForm({addContact}) {
             ...values, 
             id: Date.now()
         });
-        actions.resetForm;
+        actions.resetForm();
     }
     return (
         <Formik
