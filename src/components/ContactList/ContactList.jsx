@@ -7,7 +7,7 @@ export default function ContactList({ contacts, searchQuery }) {
         ? contacts
         : contacts.filter(contact => contact.name.toLowerCase().includes(searchQuery.toLowerCase()))
     return (
-        <ul >
+        <ul className={css.container}>
             {displayedContacts
                 .map((contact) => {
                 return <li className={css.contactItem}
