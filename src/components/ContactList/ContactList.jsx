@@ -1,10 +1,15 @@
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css'
 
-export default function ContactList({ contacts }) {
+
+export default function ContactList({ contacts, searchQuery }) {
+    const displayedContacts = searchQuery.length === 0
+        ? contacts
+        : contacts.filter(contact => contact.name.toLowerCase().includes(searchQuery.toLowerCase()))
     return (
         <ul >
-            {contacts.map((contact) => {
+            {displayedContacts
+                .map((contact) => {
                 return <li className={css.contactItem}
                     key={contact.id}>
                     <Contact name={contact.name} number={contact.number} />
@@ -12,5 +17,20 @@ export default function ContactList({ contacts }) {
             })}
         </ul>
     )
-    
 }
+// works:
+// export default function ContactList({ contacts, searchQuery }) {
+//     return (
+//         <ul >
+//             {contacts
+//                 .filter(contact => contact.name.toLowerCase().includes(searchQuery.toLowerCase()))
+//                 .map((contact) => {
+//                 return <li className={css.contactItem}
+//                     key={contact.id}>
+//                     <Contact name={contact.name} number={contact.number} />
+//                 </li>;
+//             })}
+//         </ul>
+//     )
+    
+// }

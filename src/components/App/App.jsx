@@ -9,32 +9,21 @@ export default function App() {
     {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
     {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    {id: 'id-5', name: 'Bennie Copeland', number: '227-91-26' },
   ])
   
-  const filterContacts = query => {
-  setContacts(contacts.filter(contact => contact.name.toLowerCase().includes(query.toLowerCase())))
-  } 
-  
-  // const [filterWords, setFilter] = useState('');
-//   const addContact = (newContact) => {
-//     setContacts((contacts) => {
-// return [...contacts, newContact]})
-  //   }
-  
-  // const handleSearchQuery = query => {
-  //   setFilter(query);
-  // } 
+  const [searchQuery, setSearchQuery] = useState("");
 
-//   const handleFilter = filterWords => {
-//   setContacts(contacts.filter(contact => contact.name.toLowerCase().includes(filterWords.toLowerCase())))
-// }
+  const handleQueryChange = (newQuery) => {
+    setSearchQuery(newQuery);
+  }
 
   return (
     <div>
       <h1>Phonebook</h1>
       {/* <ContactForm /> */}
-      <SearchBox onChange={filterContacts} />
-      <ContactList contacts={contacts} />
+      <SearchBox inputValue={searchQuery} onChange={handleQueryChange} />
+      <ContactList contacts={contacts} searchQuery={searchQuery} />
     </div>
 
   )
