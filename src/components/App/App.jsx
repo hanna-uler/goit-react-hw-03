@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import ContactList from '../ContactList/ContactList'
-// import ContactForm from '../ContactForm/ContactForm'
+import ContactForm from '../ContactForm/ContactForm'
 import SearchBox from '../SearchBox/SearchBox'
 
 export default function App() {
@@ -14,13 +14,19 @@ export default function App() {
   
   const [searchQuery, setSearchQuery] = useState("");
 
+  const addContact = (newContact) => {
+    setContacts((contacts) => {
+      return [...contacts, newContact]
+    })
+  }
+
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <div>
       <h1>Phonebook</h1>
-      {/* <ContactForm /> */}
+      <ContactForm addContact={addContact}/>
       <SearchBox inputValue={searchQuery} onChange={setSearchQuery} />
       <ContactList contacts={visibleContacts} />
     </div>
