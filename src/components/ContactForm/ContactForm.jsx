@@ -1,8 +1,7 @@
 import css from './ContactForm.module.css'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useId } from 'react'
 import * as Yup from "yup";
-import { ErrorMessage } from "formik";
 
 
 export default function ContactForm({addContact}) {
@@ -18,15 +17,12 @@ export default function ContactForm({addContact}) {
     });
 
     const handleSubmit = (values, actions) => {
-        addContact({
-            ...values, 
-            id: Date.now()
-        });
+        addContact({ ...values, id: Date.now() });
         actions.resetForm();
     }
     return (
         <Formik
-            initialValues={{ contactForm }}
+            initialValues={contactForm }
             onSubmit={handleSubmit}
             validationSchema={ContactSchema}
         >
