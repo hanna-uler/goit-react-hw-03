@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import ContactList from '../ContactList/ContactList'
 import ContactForm from '../ContactForm/ContactForm'
 import SearchBox from '../SearchBox/SearchBox'
+import { useDebounce } from 'use-debounce';
 
-export default function App() {
-  const [contacts, setContacts] = useState([
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    {id: 'id-5', name: 'Bennie Copeland', number: '227-91-26' },
-  ])
+const initContacts = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
+  {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
+  {id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+]
   
+export default function App() {
+  const [contacts, setContacts] = useState(initContacts)
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 300);
 
   const addContact = (newContact) => {
     setContacts((contacts) => {
@@ -20,8 +22,10 @@ export default function App() {
     })
   }
 
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  const visibleContacts = useMemo(() => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()))
+  }, [debouncedSearchQuery, contacts]);
 
   return (
     <div>
