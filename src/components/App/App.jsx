@@ -27,12 +27,17 @@ export default function App() {
       contact.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()))
   }, [debouncedSearchQuery, contacts]);
 
+  const deleteContact = (id) => {
+    setContacts(contacts => contacts.filter((contact) => contact.id !== id))
+  }
+
+
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm addContact={addContact}/>
       <SearchBox inputValue={searchQuery} onChange={setSearchQuery} />
-      <ContactList contacts={visibleContacts} />
+      <ContactList deleteContact={deleteContact} contacts={visibleContacts} />
     </div>
 
   )
