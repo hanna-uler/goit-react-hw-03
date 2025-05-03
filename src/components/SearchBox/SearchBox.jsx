@@ -5,6 +5,7 @@ export default function SearchBox({inputValue, onChange}) {
         <div>
             <label htmlFor='searchInput'>Find contacts by name</label>
             <input
+                className={css.input}
                 type='text'
                 id='searchInput'
                 value={inputValue}
