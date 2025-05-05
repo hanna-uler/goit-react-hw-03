@@ -14,8 +14,8 @@ export default function ContactForm({addContact}) {
     const nameId = useId();
     const numberId = useId();
     const ContactSchema = Yup.object().shape({
-        name: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required"),
-        number: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required")
+        name: Yup.string().min(3, "Name must be at least 3 characters long.").max(50, "Name can't be longer than 50 characters.").required("Name is required."),
+        number: Yup.string().min(3, "Number must be at least 3 characters long.").max(50, "Number can't be longer than 50 characters.").required("Number is required.")
     });
 
     const handleSubmit = (values, actions) => {
