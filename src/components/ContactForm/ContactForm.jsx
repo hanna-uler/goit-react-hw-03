@@ -2,6 +2,8 @@ import css from './ContactForm.module.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useId } from 'react'
 import * as Yup from "yup";
+import { LuUserRoundPlus } from "react-icons/lu";
+
 
 
 export default function ContactForm({addContact}) {
@@ -33,7 +35,7 @@ export default function ContactForm({addContact}) {
                 <label className={css.label} htmlFor={numberId}>Number</label>
                 <Field className={css.field} type="tel" name="number" id={numberId} />
                 <ErrorMessage className={css.error} name="number" component="span" />
-				<button className={css.btn} type="submit">Add contact</button>
+				<button className={css.btn} type="submit">Add contact<LuUserRoundPlus className={css.icon} size="1rem"/></button>
 			</Form>
         </Formik>
     )
