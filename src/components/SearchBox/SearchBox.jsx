@@ -3,7 +3,7 @@ import { LuUserRoundSearch } from "react-icons/lu";
 
 export default function SearchBox({inputValue, onChange}) {
     return (
-        <div>
+        <div className={css.container}>
             <label htmlFor='searchInput'><LuUserRoundSearch className={css.icon} size="1rem"/>Find contacts by name</label>
             <input
                 className={css.input}
