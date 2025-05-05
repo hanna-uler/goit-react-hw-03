@@ -2,6 +2,7 @@ import css from './ContactForm.module.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { useId } from 'react'
 import * as Yup from "yup";
+import "yup-phone-lite";
 import { LuUserRoundPlus } from "react-icons/lu";
 
 
@@ -15,7 +16,7 @@ export default function ContactForm({addContact}) {
     const numberId = useId();
     const ContactSchema = Yup.object().shape({
         name: Yup.string().min(3, "Name must be at least 3 characters long.").max(50, "Name can't be longer than 50 characters.").required("Name is required."),
-        number: Yup.string().min(3, "Number must be at least 3 characters long.").max(50, "Number can't be longer than 50 characters.").required("Number is required.")
+        number: Yup.string().phone(["UA","US"],"Please enter a valid phone number for Ukraine or USA.").required("Number is required.")
     });
 
     const handleSubmit = (values, actions) => {
